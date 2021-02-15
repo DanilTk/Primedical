@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Condition {
-    private String name;
-    private String type;
+    private ConditionName name;
+    private ConditionType type;
 }

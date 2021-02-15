@@ -10,8 +10,8 @@ import java.util.Set;
 import static pl.med.demo.model.ConditionName.*;
 
 @Service
-public class DiabetesScreening implements Screening {
-    private final Set<ConditionName> riskFactors = Set.of(HYPERTENSION, CVD, HIGH_CHOLESTEROL, PCO);
+public class HypertensionScreening implements Screening {
+    private final Set<ConditionName> riskFactors = Set.of(DIABETES, CVD, HIGH_CHOLESTEROL);
 
     @Override
     public Prescription performScreening(UserProfile userProfile) {
@@ -22,18 +22,25 @@ public class DiabetesScreening implements Screening {
             riskScore = riskScore++;
         }
 
-//todo: finalize prescription object params returned
-        if (userProfile.getAge() <= 19 && isInRiskGroup(bmi, riskScore, 2)) {
+        if (userProfile.getSmokerProfile().isSmoker()) {
+            riskScore = riskScore++;
+        }
+
+        if (userProfile.getAge() > 19 && userProfile.getAge() <= 39) {
             return Prescription.builder()
-                    .note("TBD")
+                    .isHealthy(false)
                     .build();
-        } else if (userProfile.getAge() > 19 && userProfile.getAge() <= 44 && isInRiskGroup(bmi, riskScore, 1)) {
+        } else if (userProfile.getAge() > 40) {
             return Prescription.builder()
-                    .note("TBD")
+                    .isHealthy(false)
                     .build();
-        } else if (userProfile.getAge() > 44) {
+        } else if (isInRiskGroup(bmi, riskScore, 1)) {
             return Prescription.builder()
-                    .note("TBD")
+                    .isHealthy(false)
+                    .build();
+        } else if (calculateRiskFactorScore(userProfile.getConditions(), Set.of(HYPERTENSION)) == 1) {
+            return Prescription.builder()
+                    .isHealthy(false)
                     .build();
         }
 

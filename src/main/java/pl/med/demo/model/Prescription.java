@@ -13,5 +13,5 @@ public class Prescription {
     private boolean isHealthy;
     private String relevanceNote;
     private String prescriptionNote;
-    private Set<DoctorProfile> doctors;
+    private Set<Visit> visit;
 }

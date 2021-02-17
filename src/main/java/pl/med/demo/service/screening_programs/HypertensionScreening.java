@@ -1,5 +1,6 @@
 package pl.med.demo.service.screening_programs;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.med.demo.model.ConditionName;
 import pl.med.demo.model.Prescription;
@@ -10,8 +11,10 @@ import java.util.Set;
 import static pl.med.demo.model.ConditionName.*;
 
 @Service
+@RequiredArgsConstructor
 public class HypertensionScreening implements Screening, RiskGroupScreening {
     private static final Set<ConditionName> RISK_FACTORS = Set.of(DIABETES, CVD, HIGH_CHOLESTEROL);
+    private final VisitService visitService;
 
     @Override
     public Prescription performScreening(UserProfile userProfile) {
@@ -40,10 +43,11 @@ public class HypertensionScreening implements Screening, RiskGroupScreening {
         if (isHealthy) {
             return confirmIsHealthy();
         } else {
-            return Prescription.builder() //todo: add visit list
+            return Prescription.builder()
                     .isHealthy(false)
                     .relevanceNote("High blood pressure is a major contributing risk factor for heart failure, heart attack, stroke, and chronic kidney disease. You should check your blood pressure from time to time to start treatment on time.")
                     .prescriptionNote("Visit general practitioner")
+                    .visit(visitService.prepareHypertensionVisits())
                     .build();
         }
     }

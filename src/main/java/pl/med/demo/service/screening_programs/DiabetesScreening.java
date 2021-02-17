@@ -1,5 +1,6 @@
 package pl.med.demo.service.screening_programs;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.med.demo.model.ConditionName;
 import pl.med.demo.model.Prescription;
@@ -10,8 +11,10 @@ import java.util.Set;
 import static pl.med.demo.model.ConditionName.*;
 
 @Service
+@RequiredArgsConstructor
 public class DiabetesScreening implements Screening, RiskGroupScreening {
     private static final Set<ConditionName> RISK_FACTORS = Set.of(HYPERTENSION, CVD, HIGH_CHOLESTEROL, PCO);
+    private final VisitService visitService;
 
     @Override
     public Prescription performScreening(UserProfile userProfile) {
@@ -34,10 +37,11 @@ public class DiabetesScreening implements Screening, RiskGroupScreening {
         if (isHealthy) {
             return confirmIsHealthy();
         } else {
-            return Prescription.builder() //todo: add visit list
+            return Prescription.builder()
                     .isHealthy(false)
                     .relevanceNote("According to American Diabetes Association you are in a group of an increased risk of having Diabetes Mellitus.  Early detection can greatly improve outcomes.\n \n Diabetes is a major cause of blindness, kidney failure, heart attacks, stroke and lower limb amputation. ")
                     .prescriptionNote("Conduct fasting plasma glucose test")
+                    .visit(visitService.prepareDiabetesVisits())
                     .build();
         }
     }

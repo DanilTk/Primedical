@@ -12,32 +12,31 @@ import static pl.med.demo.model.ConditionName.CVD;
 
 @Service
 public class CholesterolScreening implements Screening {
-    private final Set<ConditionName> riskFactors = Set.of(CVD);
+    private static final Set<ConditionName> RISK_FACTORS = Set.of(CVD);
 
     @Override
     public Prescription performScreening(UserProfile userProfile) {
-        int riskScore = calculateRiskFactorScore(userProfile.getConditions(), riskFactors);
+        boolean isHealthy = true;
+        int riskScore = calculateRiskFactorScore(userProfile.getConditions(), RISK_FACTORS);
 
         if (userProfile.getAge() > 10 && userProfile.getAge() <= 45) {
-            return Prescription.builder()
-                    .isHealthy(false)
-                    .build();
+            isHealthy = false;
         } else if (userProfile.getAge() > 45 && userProfile.getGender() == Gender.M) {
-            return Prescription.builder()
-                    .isHealthy(false)
-                    .build();
+            isHealthy = false;
         } else if (userProfile.getAge() > 55 && userProfile.getGender() == Gender.F) {
-            return Prescription.builder()
-                    .isHealthy(false)
-                    .build();
+            isHealthy = false;
         } else if (userProfile.getAge() > 65 || riskScore > 0) {
-            return Prescription.builder()
-                    .isHealthy(false)
-                    .build();
+            isHealthy = false;
         }
 
-        return Prescription.builder()
-                .isHealthy(true)
-                .build();
+        if (isHealthy) {
+            return confirmIsHealthy();
+        } else {
+            return Prescription.builder() //todo: add visit list
+                    .isHealthy(false)
+                    .relevanceNote("Dyslipidemia occurs when there are abnormal amounts of lipids (e.g., cholesterol and/or fat) in the blood. This condition is a major risk factor for developing cardiovascular disease (CVD), which is the leading cause of death among men and women worldwide. These tests will be used by your GP to assess the need to start you on medications called statins based on calculated risk of a cardiovascular event(ACC/AHA or SCORE).")
+                    .prescriptionNote("Conduct fasting plasma glucose test")
+                    .build();
+        }
     }
 }

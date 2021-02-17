@@ -23,4 +23,10 @@ public interface Screening {
                 .collect(Collectors.toSet())
                 .size();
     }
+
+    default Prescription confirmIsHealthy() {
+        return Prescription.builder()
+                .isHealthy(true)
+                .build();
+    }
 }

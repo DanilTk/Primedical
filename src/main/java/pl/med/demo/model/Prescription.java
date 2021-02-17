@@ -11,6 +11,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Prescription {
     private boolean isHealthy;
-    private String note;
+    private String relevanceNote;
+    private String prescriptionNote;
     private Set<DoctorProfile> doctors;
 }

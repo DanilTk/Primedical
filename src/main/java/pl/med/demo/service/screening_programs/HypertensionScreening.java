@@ -10,46 +10,41 @@ import java.util.Set;
 import static pl.med.demo.model.ConditionName.*;
 
 @Service
-public class HypertensionScreening implements Screening {
-    private final Set<ConditionName> riskFactors = Set.of(DIABETES, CVD, HIGH_CHOLESTEROL);
+public class HypertensionScreening implements Screening, RiskGroupScreening {
+    private static final Set<ConditionName> RISK_FACTORS = Set.of(DIABETES, CVD, HIGH_CHOLESTEROL);
 
     @Override
     public Prescription performScreening(UserProfile userProfile) {
+        boolean isHealthy = true;
         double bmi = calculateBMI(userProfile.getWeight(), userProfile.getHeight());
-        int riskScore = calculateRiskFactorScore(userProfile.getConditions(), riskFactors);
+        int riskScore = calculateRiskFactorScore(userProfile.getConditions(), RISK_FACTORS);
 
         if (userProfile.getActivityHours() < 0.5) {
-            riskScore = riskScore++;
+            riskScore = riskScore + 1;
         }
 
         if (userProfile.getSmokerProfile().isSmoker()) {
-            riskScore = riskScore++;
+            riskScore = riskScore + 1;
         }
 
         if (userProfile.getAge() > 19 && userProfile.getAge() <= 39) {
-            return Prescription.builder()
-                    .isHealthy(false)
-                    .build();
+            isHealthy = false;
         } else if (userProfile.getAge() > 40) {
-            return Prescription.builder()
-                    .isHealthy(false)
-                    .build();
+            isHealthy = false;
         } else if (isInRiskGroup(bmi, riskScore, 1)) {
-            return Prescription.builder()
-                    .isHealthy(false)
-                    .build();
+            isHealthy = false;
         } else if (calculateRiskFactorScore(userProfile.getConditions(), Set.of(HYPERTENSION)) == 1) {
-            return Prescription.builder()
-                    .isHealthy(false)
-                    .build();
+            isHealthy = false;
         }
 
-        return Prescription.builder()
-                .isHealthy(true)
-                .build();
-    }
-
-    private boolean isInRiskGroup(double bmi, int riskFactorScore, int riskFactorThreshold) {
-        return bmi >= 25 && riskFactorScore >= riskFactorThreshold;
+        if (isHealthy) {
+            return confirmIsHealthy();
+        } else {
+            return Prescription.builder() //todo: add visit list
+                    .isHealthy(false)
+                    .relevanceNote("High blood pressure is a major contributing risk factor for heart failure, heart attack, stroke, and chronic kidney disease. You should check your blood pressure from time to time to start treatment on time.")
+                    .prescriptionNote("Visit general practitioner")
+                    .build();
+        }
     }
 }

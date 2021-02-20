@@ -17,5 +17,6 @@ public class UserQuestionnaire {
     private double activityHours;
     private SmokingQuestionnaire smokingQuestionnaire;
     private Set<Condition> conditions;
-    private Set<FamilyCondition> familyCondition;
+    private Set<FamilyCondition> familyConditions;
+    private Set<ExceptionMessage> exceptionMessages;
 }

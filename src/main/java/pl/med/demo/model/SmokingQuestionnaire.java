@@ -9,5 +9,5 @@ public class SmokingQuestionnaire {
     private boolean isSmoker;
     private int minCigarettesSmoked;
     private int maxCigarettesSmoked;
-    private int smokingPeriod;
+    private int yearsOfSmoking;
 }

@@ -21,7 +21,7 @@ public class ScreeningController {
     private final VisitService visitService;
 
     @GetMapping
-    ResponseEntity<Set<Prescription>> conductFullScreening() {
+    ResponseEntity<ScreeningResult> conductFullScreening() {
         UserQuestionnaire questionnaire = UserQuestionnaire.builder()
                 .gender(Gender.M)
                 .height(183)
@@ -30,10 +30,10 @@ public class ScreeningController {
                 .smokingQuestionnaire(new SmokingQuestionnaire(false, 0, 0, 0))
                 .activityHours(5)
                 .conditions(Set.of(new Condition(ConditionName.CVD, null)))
-                .familyCondition(Collections.emptySet())
+                .familyConditions(Collections.emptySet())
                 .build();
 
-        return ResponseEntity.status(HttpStatus.OK).body(screeningService.screenForPrescriptions(questionnaire));
+        return ResponseEntity.status(HttpStatus.OK).body(screeningService.conductScreening(questionnaire));
     }
 
     @GetMapping(value = "/visits")

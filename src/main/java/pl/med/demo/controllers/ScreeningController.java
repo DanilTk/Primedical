@@ -25,9 +25,9 @@ public class ScreeningController {
         ScreeningResult screeningResult = screeningService.conductScreening(questionnaire);
 
         if (screeningResult.getExceptionMessages().isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(screeningResult);
-        } else {
             return ResponseEntity.status(HttpStatus.OK).body(screeningResult);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(screeningResult);
         }
     }
 

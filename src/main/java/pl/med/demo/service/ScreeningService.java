@@ -9,6 +9,7 @@ import pl.med.demo.model.UserQuestionnaire;
 import pl.med.demo.service.screening_programs.ScreeningProvider;
 import pl.med.demo.validation.QuestionnaireValidator;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -20,9 +21,14 @@ public class ScreeningService {
     private final QuestionnaireValidator questionnaireValidator;
 
     public ScreeningResult conductScreening(UserQuestionnaire userQuestionnaire) {
+        Set<Prescription> prescriptions = Collections.emptySet();
         List<ExceptionMessage> exceptionMessages = questionnaireValidator.validate(userQuestionnaire);
-        Set<Prescription> prescriptions = screeningProvider.conductAllScreenings(userQuestionnaire);
-        prescriptions = filterToRelevantPrescriptions(prescriptions);
+
+        if (exceptionMessages.isEmpty()) {
+            prescriptions = screeningProvider.conductAllScreenings(userQuestionnaire);
+            prescriptions = filterToRelevantPrescriptions(prescriptions);
+        }
+
         return new ScreeningResult(prescriptions, exceptionMessages);
     }
 

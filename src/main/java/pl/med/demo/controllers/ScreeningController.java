@@ -6,11 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.med.demo.model.*;
+import pl.med.demo.model.ScreeningResult;
+import pl.med.demo.model.ScreeningType;
+import pl.med.demo.model.UserQuestionnaire;
+import pl.med.demo.model.Visit;
 import pl.med.demo.service.ScreeningService;
 import pl.med.demo.service.VisitService;
 
-import java.util.Collections;
 import java.util.Set;
 
 @RestController
@@ -21,19 +23,14 @@ public class ScreeningController {
     private final VisitService visitService;
 
     @GetMapping
-    ResponseEntity<ScreeningResult> conductFullScreening() {
-        UserQuestionnaire questionnaire = UserQuestionnaire.builder()
-                .gender(Gender.M)
-                .height(183)
-                .weight(85)
-                .age(36)
-                .smokingQuestionnaire(new SmokingQuestionnaire(false, 0, 0, 0))
-                .activityHours(5)
-                .conditions(Set.of(new Condition(ConditionName.CVD, null)))
-                .familyConditions(Collections.emptySet())
-                .build();
+    ResponseEntity<ScreeningResult> conductFullScreening(UserQuestionnaire questionnaire) {
+        ScreeningResult screeningResult = screeningService.conductScreening(questionnaire);
 
-        return ResponseEntity.status(HttpStatus.OK).body(screeningService.conductScreening(questionnaire));
+        if (screeningResult.getExceptionMessages().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(screeningResult);
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(screeningResult);
+        }
     }
 
     @GetMapping(value = "/visits")

@@ -15,7 +15,7 @@ import static pl.med.demo.model.ConditionName.CVD;
 @RequiredArgsConstructor
 public class CholesterolScreening implements Screening {
     private static final Set<ConditionName> RISK_FACTORS = Set.of(CVD);
-    private final VisitService visitService;
+    private final VisitBuilder visitBuilder;
 
     @Override
     public Prescription performScreening(UserQuestionnaire userQuestionnaire) {
@@ -39,7 +39,7 @@ public class CholesterolScreening implements Screening {
                     .isHealthy(false)
                     .relevanceNote("Dyslipidemia occurs when there are abnormal amounts of lipids (e.g., cholesterol and/or fat) in the blood. This condition is a major risk factor for developing cardiovascular disease (CVD), which is the leading cause of death among men and women worldwide. These tests will be used by your GP to assess the need to start you on medications called statins based on calculated risk of a cardiovascular event(ACC/AHA or SCORE).")
                     .prescriptionNote("Conduct fasting plasma glucose test")
-                    .visit(visitService.prepareCholesterolVisits())
+                    .visit(visitBuilder.buildCholesterolVisits())
                     .build();
         }
     }

@@ -10,9 +10,9 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 @Service
-public class VisitService { //todo: replace with builder or factory
+public class VisitBuilder {
 
-    protected Set<Visit> prepareDiabetesVisits() {
+    protected Set<Visit> buildDiabetesVisits() {
         Visit visit1 = Visit.builder()
                 .locationName("I-Lab, Chmielna 104")
                 .visitPrice(BigDecimal.valueOf(10))
@@ -34,7 +34,7 @@ public class VisitService { //todo: replace with builder or factory
         return Set.of(visit1, visit2, visit3);
     }
 
-    protected Set<Visit> prepareCholesterolVisits() {
+    protected Set<Visit> buildCholesterolVisits() {
         Visit visit1 = Visit.builder()
                 .locationName("Synevo, Bagno 5")
                 .visitPrice(BigDecimal.valueOf(9))
@@ -56,7 +56,7 @@ public class VisitService { //todo: replace with builder or factory
         return Set.of(visit1, visit2, visit3);
     }
 
-    protected Set<Visit> prepareHypertensionVisits() {
+    protected Set<Visit> buildHypertensionVisits() {
         Visit visit1 = Visit.builder()
                 .locationName("SmartMed, Powstancow 29")
                 .visitPrice(BigDecimal.valueOf(50))

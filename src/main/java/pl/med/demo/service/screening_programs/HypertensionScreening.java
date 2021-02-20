@@ -14,7 +14,7 @@ import static pl.med.demo.model.ConditionName.*;
 @RequiredArgsConstructor
 public class HypertensionScreening implements Screening, RiskGroupScreening {
     private static final Set<ConditionName> RISK_FACTORS = Set.of(DIABETES, CVD, HIGH_CHOLESTEROL);
-    private final VisitService visitService;
+    private final VisitBuilder visitBuilder;
 
     @Override
     public Prescription performScreening(UserQuestionnaire userQuestionnaire) {
@@ -47,7 +47,7 @@ public class HypertensionScreening implements Screening, RiskGroupScreening {
                     .isHealthy(false)
                     .relevanceNote("High blood pressure is a major contributing risk factor for heart failure, heart attack, stroke, and chronic kidney disease. You should check your blood pressure from time to time to start treatment on time.")
                     .prescriptionNote("Visit general practitioner")
-                    .visit(visitService.prepareHypertensionVisits())
+                    .visit(visitBuilder.buildHypertensionVisits())
                     .build();
         }
     }

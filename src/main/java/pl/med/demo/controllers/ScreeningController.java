@@ -3,9 +3,7 @@ package pl.med.demo.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.med.demo.model.ScreeningResult;
 import pl.med.demo.model.ScreeningType;
 import pl.med.demo.model.UserQuestionnaire;
@@ -22,8 +20,8 @@ public class ScreeningController {
     private final ScreeningService screeningService;
     private final VisitService visitService;
 
-    @GetMapping
-    ResponseEntity<ScreeningResult> conductFullScreening(UserQuestionnaire questionnaire) {
+    @PostMapping
+    ResponseEntity<ScreeningResult> conductFullScreening(@RequestBody UserQuestionnaire questionnaire) {
         ScreeningResult screeningResult = screeningService.conductScreening(questionnaire);
 
         if (screeningResult.getExceptionMessages().isEmpty()) {

@@ -18,5 +18,4 @@ public class UserQuestionnaire {
     private SmokingQuestionnaire smokingQuestionnaire;
     private Set<Condition> conditions;
     private Set<FamilyCondition> familyConditions;
-    private Set<ExceptionMessage> exceptionMessages;
 }

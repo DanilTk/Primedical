@@ -6,7 +6,6 @@ import pl.med.demo.model.ExceptionMessage;
 import pl.med.demo.model.Prescription;
 import pl.med.demo.model.ScreeningResult;
 import pl.med.demo.model.UserQuestionnaire;
-import pl.med.demo.service.screening_programs.ScreeningProvider;
 import pl.med.demo.validation.QuestionnaireValidator;
 
 import java.util.Collections;

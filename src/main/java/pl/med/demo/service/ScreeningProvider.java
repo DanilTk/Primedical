@@ -1,9 +1,12 @@
-package pl.med.demo.service.screening_programs;
+package pl.med.demo.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.med.demo.model.Prescription;
 import pl.med.demo.model.UserQuestionnaire;
+import pl.med.demo.service.screening_programs.CholesterolScreening;
+import pl.med.demo.service.screening_programs.DiabetesScreening;
+import pl.med.demo.service.screening_programs.HypertensionScreening;
 
 import java.util.Set;
 

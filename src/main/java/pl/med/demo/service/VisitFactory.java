@@ -1,18 +1,34 @@
-package pl.med.demo.service.screening_programs;
+package pl.med.demo.service;
 
 import org.springframework.stereotype.Service;
-import pl.med.demo.model.Doctor;
-import pl.med.demo.model.Specialization;
-import pl.med.demo.model.Visit;
-import pl.med.demo.model.VisitType;
+import pl.med.demo.model.*;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Set;
 
 @Service
-public class VisitBuilder {
+public class VisitFactory {
 
-    protected Set<Visit> buildDiabetesVisits() {
+    public Set<Visit> getVisitsOfType(ScreeningType screeningType) {
+        Set<Visit> visits = Collections.emptySet();
+
+        switch (screeningType) {
+            case DIABETES_SCREENING:
+                visits = buildDiabetesVisits();
+                break;
+            case CHOLESTEROL_SCREENING:
+                visits = buildCholesterolVisits();
+                break;
+            case HYPERTENSION_SCREENING:
+                visits = buildHypertensionVisits();
+                break;
+        }
+
+        return visits;
+    }
+
+    private Set<Visit> buildDiabetesVisits() {
         Visit visit1 = Visit.builder()
                 .locationName("I-Lab, Chmielna 104")
                 .visitPrice(BigDecimal.valueOf(10))
@@ -34,7 +50,7 @@ public class VisitBuilder {
         return Set.of(visit1, visit2, visit3);
     }
 
-    protected Set<Visit> buildCholesterolVisits() {
+    private Set<Visit> buildCholesterolVisits() {
         Visit visit1 = Visit.builder()
                 .locationName("Synevo, Bagno 5")
                 .visitPrice(BigDecimal.valueOf(9))
@@ -56,7 +72,7 @@ public class VisitBuilder {
         return Set.of(visit1, visit2, visit3);
     }
 
-    protected Set<Visit> buildHypertensionVisits() {
+    private Set<Visit> buildHypertensionVisits() {
         Visit visit1 = Visit.builder()
                 .locationName("SmartMed, Powstancow 29")
                 .visitPrice(BigDecimal.valueOf(50))

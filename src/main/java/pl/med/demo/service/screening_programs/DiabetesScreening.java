@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.med.demo.model.ConditionName;
 import pl.med.demo.model.Prescription;
-import pl.med.demo.model.UserProfile;
+import pl.med.demo.model.UserQuestionnaire;
 
 import java.util.Set;
 
@@ -17,20 +17,20 @@ public class DiabetesScreening implements Screening, RiskGroupScreening {
     private final VisitService visitService;
 
     @Override
-    public Prescription performScreening(UserProfile userProfile) {
+    public Prescription performScreening(UserQuestionnaire userQuestionnaire) {
         boolean isHealthy = true;
-        double bmi = calculateBMI(userProfile.getWeight(), userProfile.getHeight());
-        int riskScore = calculateRiskFactorScore(userProfile.getConditions(), RISK_FACTORS);
+        double bmi = calculateBMI(userQuestionnaire.getWeight(), userQuestionnaire.getHeight());
+        int riskScore = calculateRiskFactorScore(userQuestionnaire.getConditions(), RISK_FACTORS);
 
-        if (userProfile.getActivityHours() < 0.5) {
+        if (userQuestionnaire.getActivityHours() < 0.5) {
             riskScore = riskScore + 1;
         }
 
-        if (userProfile.getAge() <= 19 && isInRiskGroup(bmi, riskScore, 2)) {
+        if (userQuestionnaire.getAge() <= 19 && isInRiskGroup(bmi, riskScore, 2)) {
             isHealthy = false;
-        } else if (userProfile.getAge() > 19 && userProfile.getAge() <= 44 && isInRiskGroup(bmi, riskScore, 1)) {
+        } else if (userQuestionnaire.getAge() > 19 && userQuestionnaire.getAge() <= 44 && isInRiskGroup(bmi, riskScore, 1)) {
             isHealthy = false;
-        } else if (userProfile.getAge() > 44) {
+        } else if (userQuestionnaire.getAge() > 44) {
             isHealthy = false;
         }
 

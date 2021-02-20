@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 @Service
-public class VisitService {
+public class VisitService { //todo: replace with builder or factory
 
     protected Set<Visit> prepareDiabetesVisits() {
         Visit visit1 = Visit.builder()

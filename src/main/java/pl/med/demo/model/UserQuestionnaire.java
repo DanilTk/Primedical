@@ -9,13 +9,13 @@ import java.util.Set;
 @Data
 @Builder
 @AllArgsConstructor
-public class UserProfile {
+public class UserQuestionnaire {
     private Gender gender;
     private int age;
     private int weight;
     private int height;
     private double activityHours;
-    private SmokerProfile smokerProfile;
+    private SmokingQuestionnaire smokingQuestionnaire;
     private Set<Condition> conditions;
     private Set<FamilyCondition> familyCondition;
 }

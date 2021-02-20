@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class SmokerProfile {
+public class SmokingQuestionnaire {
     private boolean isSmoker;
     private int minCigarettesSmoked;
     private int maxCigarettesSmoked;

@@ -3,7 +3,7 @@ package pl.med.demo.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.med.demo.model.Prescription;
-import pl.med.demo.model.UserProfile;
+import pl.med.demo.model.UserQuestionnaire;
 import pl.med.demo.service.screening_programs.CholesterolScreening;
 import pl.med.demo.service.screening_programs.DiabetesScreening;
 import pl.med.demo.service.screening_programs.HypertensionScreening;
@@ -18,10 +18,10 @@ public class ScreeningService {
     private final CholesterolScreening cholesterolScreening;
     private final HypertensionScreening hypertensionScreening;
 
-    public Set<Prescription> screenForPrescriptions(UserProfile userProfile) {
-        Prescription diabetesPrescription = diabetesScreening.performScreening(userProfile);
-        Prescription cholesterolPrescription = cholesterolScreening.performScreening(userProfile);
-        Prescription hypertensionPrescription = hypertensionScreening.performScreening(userProfile);
+    public Set<Prescription> screenForPrescriptions(UserQuestionnaire userQuestionnaire) { //todo: add screening provider for better cohesion
+        Prescription diabetesPrescription = diabetesScreening.performScreening(userQuestionnaire);
+        Prescription cholesterolPrescription = cholesterolScreening.performScreening(userQuestionnaire);
+        Prescription hypertensionPrescription = hypertensionScreening.performScreening(userQuestionnaire);
 
         return Set.of(diabetesPrescription, cholesterolPrescription, hypertensionPrescription)
                 .stream()

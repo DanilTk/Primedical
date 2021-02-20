@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.med.demo.model.ConditionName;
 import pl.med.demo.model.Gender;
 import pl.med.demo.model.Prescription;
-import pl.med.demo.model.UserProfile;
+import pl.med.demo.model.UserQuestionnaire;
 
 import java.util.Set;
 
@@ -18,17 +18,17 @@ public class CholesterolScreening implements Screening {
     private final VisitService visitService;
 
     @Override
-    public Prescription performScreening(UserProfile userProfile) {
+    public Prescription performScreening(UserQuestionnaire userQuestionnaire) {
         boolean isHealthy = true;
-        int riskScore = calculateRiskFactorScore(userProfile.getConditions(), RISK_FACTORS);
+        int riskScore = calculateRiskFactorScore(userQuestionnaire.getConditions(), RISK_FACTORS);
 
-        if (userProfile.getAge() > 10 && userProfile.getAge() <= 45) {
+        if (userQuestionnaire.getAge() > 10 && userQuestionnaire.getAge() <= 45) {
             isHealthy = false;
-        } else if (userProfile.getAge() > 45 && userProfile.getGender() == Gender.M) {
+        } else if (userQuestionnaire.getAge() > 45 && userQuestionnaire.getGender() == Gender.M) {
             isHealthy = false;
-        } else if (userProfile.getAge() > 55 && userProfile.getGender() == Gender.F) {
+        } else if (userQuestionnaire.getAge() > 55 && userQuestionnaire.getGender() == Gender.F) {
             isHealthy = false;
-        } else if (userProfile.getAge() > 65 || riskScore > 0) {
+        } else if (userQuestionnaire.getAge() > 65 || riskScore > 0) {
             isHealthy = false;
         }
 

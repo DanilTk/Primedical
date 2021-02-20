@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.med.demo.model.Prescription;
-import pl.med.demo.model.UserProfile;
+import pl.med.demo.model.UserQuestionnaire;
 import pl.med.demo.service.ScreeningService;
 
 import java.util.Set;
@@ -19,7 +19,7 @@ public class ScreeningController {
     private final ScreeningService screeningService;
 
     @GetMapping(value = "/all")
-    ResponseEntity<Set<Prescription>> conductFullScreening(UserProfile userProfile) {
-        return ResponseEntity.status(HttpStatus.OK).body(screeningService.screenForPrescriptions(userProfile));
+    ResponseEntity<Set<Prescription>> conductFullScreening(UserQuestionnaire userQuestionnaire) {
+        return ResponseEntity.status(HttpStatus.OK).body(screeningService.screenForPrescriptions(userQuestionnaire));
     }
 }

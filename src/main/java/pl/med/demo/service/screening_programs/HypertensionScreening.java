@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.med.demo.model.ConditionName;
 import pl.med.demo.model.Prescription;
-import pl.med.demo.model.UserProfile;
+import pl.med.demo.model.UserQuestionnaire;
 
 import java.util.Set;
 
@@ -17,26 +17,26 @@ public class HypertensionScreening implements Screening, RiskGroupScreening {
     private final VisitService visitService;
 
     @Override
-    public Prescription performScreening(UserProfile userProfile) {
+    public Prescription performScreening(UserQuestionnaire userQuestionnaire) {
         boolean isHealthy = true;
-        double bmi = calculateBMI(userProfile.getWeight(), userProfile.getHeight());
-        int riskScore = calculateRiskFactorScore(userProfile.getConditions(), RISK_FACTORS);
+        double bmi = calculateBMI(userQuestionnaire.getWeight(), userQuestionnaire.getHeight());
+        int riskScore = calculateRiskFactorScore(userQuestionnaire.getConditions(), RISK_FACTORS);
 
-        if (userProfile.getActivityHours() < 0.5) {
+        if (userQuestionnaire.getActivityHours() < 0.5) {
             riskScore = riskScore + 1;
         }
 
-        if (userProfile.getSmokerProfile().isSmoker()) {
+        if (userQuestionnaire.getSmokingQuestionnaire().isSmoker()) {
             riskScore = riskScore + 1;
         }
 
-        if (userProfile.getAge() > 19 && userProfile.getAge() <= 39) {
+        if (userQuestionnaire.getAge() > 19 && userQuestionnaire.getAge() <= 39) {
             isHealthy = false;
-        } else if (userProfile.getAge() > 40) {
+        } else if (userQuestionnaire.getAge() > 40) {
             isHealthy = false;
         } else if (isInRiskGroup(bmi, riskScore, 1)) {
             isHealthy = false;
-        } else if (calculateRiskFactorScore(userProfile.getConditions(), Set.of(HYPERTENSION)) == 1) {
+        } else if (calculateRiskFactorScore(userQuestionnaire.getConditions(), Set.of(HYPERTENSION)) == 1) {
             isHealthy = false;
         }
 

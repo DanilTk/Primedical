@@ -4,13 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.med.demo.model.ScreeningResult;
-import pl.med.demo.model.ScreeningType;
-import pl.med.demo.model.UserQuestionnaire;
-import pl.med.demo.model.Visit;
+import pl.med.demo.model.*;
 import pl.med.demo.service.ScreeningService;
 import pl.med.demo.service.VisitService;
 
+import java.util.Arrays;
 import java.util.Set;
 
 @RestController
@@ -34,5 +32,10 @@ public class ScreeningController {
     @GetMapping(value = "/visits")
     ResponseEntity<Set<Visit>> findVisits(ScreeningType screeningType) {
         return ResponseEntity.status(HttpStatus.OK).body(visitService.findVisitsOfType(screeningType));
+    }
+
+    @GetMapping(value = "/conditions")
+    ResponseEntity<Set<ConditionName>> findConditions() {
+        return ResponseEntity.status(HttpStatus.OK).body(Set.copyOf(Arrays.asList((ConditionName.values()))));
     }
 }

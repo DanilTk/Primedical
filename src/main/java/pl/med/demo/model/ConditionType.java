@@ -1,6 +1,7 @@
 package pl.med.demo.model;
 
 public enum ConditionType {
+    NA("N/A"),
     TYPE_1("Type 1"),
     TYPE_2("Type 2"),
     TYPE_3("Type 3"),

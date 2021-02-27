@@ -38,4 +38,14 @@ public class ScreeningController {
     ResponseEntity<Set<ConditionName>> findConditions() {
         return ResponseEntity.status(HttpStatus.OK).body(Set.copyOf(Arrays.asList((ConditionName.values()))));
     }
+
+    @GetMapping(value = "/ralashionships")
+    ResponseEntity<Set<RelationshipLevel>> findRelationshipLevels() {
+        return ResponseEntity.status(HttpStatus.OK).body(Set.copyOf(Arrays.asList(RelationshipLevel.values())));
+    }
+
+    @GetMapping(value = "/condition-types")
+    ResponseEntity<Set<ConditionType>> findConditionTypes() {
+        return ResponseEntity.status(HttpStatus.OK).body(Set.copyOf(Arrays.asList(ConditionType.values())));
+    }
 }

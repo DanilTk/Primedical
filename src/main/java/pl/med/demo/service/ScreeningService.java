@@ -20,7 +20,7 @@ public class ScreeningService {
     private final QuestionnaireValidator questionnaireValidator;
 
     public ScreeningResult conductScreening(UserQuestionnaire userQuestionnaire) {
-        Set<Prescription> prescriptions = Collections.emptySet();
+        List<Prescription> prescriptions = Collections.emptyList();
         List<ExceptionMessage> exceptionMessages = questionnaireValidator.validate(userQuestionnaire);
 
         if (exceptionMessages.isEmpty()) {
@@ -28,12 +28,12 @@ public class ScreeningService {
             prescriptions = filterToRelevantPrescriptions(prescriptions);
         }
 
-        return new ScreeningResult(prescriptions, exceptionMessages);
+        return new ScreeningResult(Set.copyOf(prescriptions), exceptionMessages);
     }
 
-    private Set<Prescription> filterToRelevantPrescriptions(Set<Prescription> prescriptions) {
+    private List<Prescription> filterToRelevantPrescriptions(List<Prescription> prescriptions) {
         return prescriptions.stream()
                 .filter(prescription -> !prescription.isHealthy())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }

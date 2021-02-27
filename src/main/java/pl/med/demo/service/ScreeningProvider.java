@@ -6,7 +6,7 @@ import pl.med.demo.model.Prescription;
 import pl.med.demo.model.UserQuestionnaire;
 import pl.med.demo.service.screening_programs.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -17,14 +17,14 @@ public class ScreeningProvider {
     private final ColonoscopyScreening colonoscopyScreening;
     private final CervicalSmearScreening cervicalSmearScreening;
 
-    public Set<Prescription> conductAllScreenings(UserQuestionnaire userQuestionnaire) {
+    public List<Prescription> conductAllScreenings(UserQuestionnaire userQuestionnaire) {
         Prescription diabetesPrescription = diabetesScreening.performScreening(userQuestionnaire);
         Prescription cholesterolPrescription = cholesterolScreening.performScreening(userQuestionnaire);
         Prescription hypertensionPrescription = hypertensionScreening.performScreening(userQuestionnaire);
         Prescription colonoscopyPrescription = colonoscopyScreening.performScreening(userQuestionnaire);
         Prescription cervicalSmearPrescription = cervicalSmearScreening.performScreening(userQuestionnaire);
 
-        return Set.of(diabetesPrescription,
+        return List.of(diabetesPrescription,
                 cholesterolPrescription,
                 hypertensionPrescription,
                 colonoscopyPrescription,

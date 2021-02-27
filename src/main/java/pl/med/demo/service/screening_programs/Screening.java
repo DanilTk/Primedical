@@ -1,12 +1,10 @@
 package pl.med.demo.service.screening_programs;
 
-import pl.med.demo.model.Condition;
-import pl.med.demo.model.ConditionName;
-import pl.med.demo.model.Prescription;
-import pl.med.demo.model.UserQuestionnaire;
+import pl.med.demo.model.*;
 
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public interface Screening {
 
@@ -16,12 +14,20 @@ public interface Screening {
         return weight / Math.pow(height, 2) * 10000;
     }
 
-    default int calculateRiskFactorScore(Set<Condition> conditions, Set<ConditionName> riskFactors) {
+    default int calculateConditionNameRiskFactorScore(Set<Condition> conditions, Set<ConditionName> riskFactors) {
         return conditions.stream()
                 .map(Condition::getName)
                 .filter(riskFactors::contains)
                 .collect(Collectors.toSet())
                 .size();
+    }
+
+    default boolean isConditionPresentInFamily(Condition condition, Set<FamilyCondition> familyConditions) {
+        Set<Set<Condition>> familyConditionsSet = familyConditions.stream()
+                .flatMap(familyCondition -> Stream.of(familyCondition.getConditions()))
+                .collect(Collectors.toSet());
+
+        return familyConditionsSet.contains(condition);
     }
 
     default Prescription confirmIsHealthy() {

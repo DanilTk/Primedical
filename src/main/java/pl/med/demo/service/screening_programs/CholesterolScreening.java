@@ -16,7 +16,7 @@ public class CholesterolScreening implements Screening {
     @Override
     public Prescription performScreening(UserQuestionnaire userQuestionnaire) {
         boolean isHealthy = true;
-        int riskScore = calculateRiskFactorScore(userQuestionnaire.getConditions(), RISK_FACTORS);
+        int riskScore = calculateConditionNameRiskFactorScore(userQuestionnaire.getConditions(), RISK_FACTORS);
 
         if (userQuestionnaire.getAge() > 10 && userQuestionnaire.getAge() <= 45) {
             isHealthy = false;

@@ -20,7 +20,7 @@ public class HypertensionScreening implements Screening, RiskGroupScreening {
     public Prescription performScreening(UserQuestionnaire userQuestionnaire) {
         boolean isHealthy = true;
         double bmi = calculateBMI(userQuestionnaire.getWeight(), userQuestionnaire.getHeight());
-        int riskScore = calculateRiskFactorScore(userQuestionnaire.getConditions(), RISK_FACTORS);
+        int riskScore = calculateConditionNameRiskFactorScore(userQuestionnaire.getConditions(), RISK_FACTORS);
 
         if (userQuestionnaire.getActivityHours() < 0.5) {
             riskScore = riskScore + 1;
@@ -36,7 +36,7 @@ public class HypertensionScreening implements Screening, RiskGroupScreening {
             isHealthy = false;
         } else if (isInRiskGroup(bmi, riskScore, 1)) {
             isHealthy = false;
-        } else if (calculateRiskFactorScore(userQuestionnaire.getConditions(), Set.of(HYPERTENSION)) == 1) {
+        } else if (calculateConditionNameRiskFactorScore(userQuestionnaire.getConditions(), Set.of(HYPERTENSION)) == 1) {
             isHealthy = false;
         }
 

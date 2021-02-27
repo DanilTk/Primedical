@@ -20,7 +20,7 @@ public class DiabetesScreening implements Screening, RiskGroupScreening {
     public Prescription performScreening(UserQuestionnaire userQuestionnaire) {
         boolean isHealthy = true;
         double bmi = calculateBMI(userQuestionnaire.getWeight(), userQuestionnaire.getHeight());
-        int riskScore = calculateRiskFactorScore(userQuestionnaire.getConditions(), RISK_FACTORS);
+        int riskScore = calculateConditionNameRiskFactorScore(userQuestionnaire.getConditions(), RISK_FACTORS);
 
         if (userQuestionnaire.getActivityHours() < 0.5) {
             riskScore = riskScore + 1;

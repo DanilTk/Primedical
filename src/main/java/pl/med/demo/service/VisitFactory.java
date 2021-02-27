@@ -23,6 +23,12 @@ public class VisitFactory {
             case HYPERTENSION_SCREENING:
                 visits = buildHypertensionVisits();
                 break;
+            case COLONOSCOPY:
+                visits = buildColonoscopyVisits();
+                break;
+            case FECAL_OCCULT_BLOOD_TEST:
+                visits = buildFecalOccultBloodTestVisits();
+                break;
         }
 
         return visits;
@@ -92,6 +98,39 @@ public class VisitFactory {
                 .visitPrice(BigDecimal.valueOf(45))
                 .visitType(VisitType.SCREENING)
                 .doctor(new Doctor("Karol", "Wojtyla", Specialization.GP))
+                .build();
+
+        return Set.of(visit1, visit2, visit3);
+    }
+
+    private Set<Visit> buildColonoscopyVisits() {
+        Visit visit = Visit.builder()
+                .locationName("Endoscopy Clinic, Ksawierow 15B")
+                .visitPrice(BigDecimal.valueOf(250))
+                .visitType(VisitType.SCREENING)
+                .doctor(new Doctor("Andrzej", "Jakimczuk", Specialization.GP))
+                .build();
+
+        return Set.of(visit);
+    }
+
+    private Set<Visit> buildFecalOccultBloodTestVisits() {
+        Visit visit1 = Visit.builder()
+                .locationName("Ilab, Powstancow 29")
+                .visitPrice(BigDecimal.valueOf(13))
+                .visitType(VisitType.LAB_TEST)
+                .build();
+
+        Visit visit2 = Visit.builder()
+                .locationName("G-Clinic, Karolkowa 17A")
+                .visitPrice(BigDecimal.valueOf(12))
+                .visitType(VisitType.LAB_TEST)
+                .build();
+
+        Visit visit3 = Visit.builder()
+                .locationName("Medline, Bohaterow 44")
+                .visitPrice(BigDecimal.valueOf(10))
+                .visitType(VisitType.LAB_TEST)
                 .build();
 
         return Set.of(visit1, visit2, visit3);

@@ -27,6 +27,7 @@ public class ScreeningProvider {
         return Set.of(diabetesPrescription,
                 cholesterolPrescription,
                 hypertensionPrescription,
-                colonoscopyPrescription);
+                colonoscopyPrescription,
+                cervicalSmearPrescription);
     }
 }

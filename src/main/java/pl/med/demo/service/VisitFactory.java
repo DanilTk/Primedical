@@ -29,6 +29,9 @@ public class VisitFactory {
             case FECAL_OCCULT_BLOOD_TEST:
                 visits = buildFecalOccultBloodTestVisits();
                 break;
+            case CERVICAL_SMEAR_SCREENING:
+                visits = buildCervicalSmearVisits();
+                break;
         }
 
         return visits;
@@ -131,6 +134,31 @@ public class VisitFactory {
                 .locationName("Medline, Bohaterow 44")
                 .visitPrice(BigDecimal.valueOf(10))
                 .visitType(VisitType.LAB_TEST)
+                .build();
+
+        return Set.of(visit1, visit2, visit3);
+    }
+
+    private Set<Visit> buildCervicalSmearVisits() {
+        Visit visit1 = Visit.builder()
+                .locationName("SmartMed, Powstancow 29")
+                .visitPrice(BigDecimal.valueOf(50))
+                .visitType(VisitType.SCREENING)
+                .doctor(new Doctor("Jan", "Kowalski", Specialization.GYNECOLOGIST))
+                .build();
+
+        Visit visit2 = Visit.builder()
+                .locationName("VipMed, Karolkowa 17A")
+                .visitPrice(BigDecimal.valueOf(40))
+                .visitType(VisitType.SCREENING)
+                .doctor(new Doctor("Mariusz", "Pudzianowski", Specialization.GYNECOLOGIST))
+                .build();
+
+        Visit visit3 = Visit.builder()
+                .locationName("EnelMed, Bohaterow 44")
+                .visitPrice(BigDecimal.valueOf(45))
+                .visitType(VisitType.SCREENING)
+                .doctor(new Doctor("Karol", "Wojtyla", Specialization.GYNECOLOGIST))
                 .build();
 
         return Set.of(visit1, visit2, visit3);

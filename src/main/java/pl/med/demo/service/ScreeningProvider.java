@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.med.demo.model.Prescription;
 import pl.med.demo.model.UserQuestionnaire;
-import pl.med.demo.service.screening_programs.CholesterolScreening;
-import pl.med.demo.service.screening_programs.ColonoscopyScreening;
-import pl.med.demo.service.screening_programs.DiabetesScreening;
-import pl.med.demo.service.screening_programs.HypertensionScreening;
+import pl.med.demo.service.screening_programs.*;
 
 import java.util.Set;
 
@@ -18,12 +15,14 @@ public class ScreeningProvider {
     private final CholesterolScreening cholesterolScreening;
     private final HypertensionScreening hypertensionScreening;
     private final ColonoscopyScreening colonoscopyScreening;
+    private final CervicalSmearScreening cervicalSmearScreening;
 
     public Set<Prescription> conductAllScreenings(UserQuestionnaire userQuestionnaire) {
         Prescription diabetesPrescription = diabetesScreening.performScreening(userQuestionnaire);
         Prescription cholesterolPrescription = cholesterolScreening.performScreening(userQuestionnaire);
         Prescription hypertensionPrescription = hypertensionScreening.performScreening(userQuestionnaire);
         Prescription colonoscopyPrescription = colonoscopyScreening.performScreening(userQuestionnaire);
+        Prescription cervicalSmearPrescription = cervicalSmearScreening.performScreening(userQuestionnaire);
 
         return Set.of(diabetesPrescription,
                 cholesterolPrescription,

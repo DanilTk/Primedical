@@ -1,6 +1,7 @@
 package pl.med.demo.model;
 
 public enum Specialization {
+    GYNECOLOGIST("Gynecologist"),
     GP("General Practitioner");
 
     private final String specialization;

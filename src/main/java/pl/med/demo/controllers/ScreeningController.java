@@ -38,14 +38,13 @@ public class ScreeningController {
      */
 
     @GetMapping(value = "/visits")
-    ResponseEntity<Set<Visit>> findVisits(ScreeningType screeningType) {
+    ResponseEntity<Set<Visit>> findVisits(@RequestParam ScreeningType screeningType) {
         return ResponseEntity.status(HttpStatus.OK).body(visitService.findVisitsOfType(screeningType));
     }
 
     /**
      * Типы болезней (Рак, Диабет, итп.)
      */
-
 
     @GetMapping(value = "/conditions")
     ResponseEntity<Set<ConditionName>> findConditions() {
@@ -56,7 +55,7 @@ public class ScreeningController {
      * Если у пользователя были наследственные болезни - нужно указать степень родства
      */
 
-    @GetMapping(value = "/ralashionships")
+    @GetMapping(value = "/relashionships")
     ResponseEntity<Set<RelationshipLevel>> findRelationshipLevels() {
         return ResponseEntity.status(HttpStatus.OK).body(Set.copyOf(Arrays.asList(RelationshipLevel.values())));
     }
@@ -64,6 +63,7 @@ public class ScreeningController {
     /**
      * Подтипы болезней (н.п. Рак - Лёгкие, Диабет - 1 уровень, итп.)
      */
+
     @GetMapping(value = "/condition-types")
     ResponseEntity<Set<ConditionType>> findConditionTypes() {
         return ResponseEntity.status(HttpStatus.OK).body(Set.copyOf(Arrays.asList(ConditionType.values())));

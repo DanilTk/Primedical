@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Set;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/api/v1/screenings")
 @RequiredArgsConstructor
 public class ScreeningController {

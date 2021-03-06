@@ -23,7 +23,7 @@ public interface Screening {
     }
 
     default boolean isConditionPresentInFamily(Condition condition, Set<FamilyCondition> familyConditions) {
-        Set<Set<Condition>> familyConditionsSet = familyConditions.stream()
+        Set<Condition> familyConditionsSet = familyConditions.stream()
                 .flatMap(familyCondition -> Stream.of(familyCondition.getConditions()))
                 .collect(Collectors.toSet());
 

@@ -13,5 +13,6 @@ public class Visit {
     private Doctor doctor;
     private BigDecimal visitPrice;
     private VisitType visitType;
+    private String visitName;
     private String locationName;
 }

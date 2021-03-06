@@ -27,6 +27,7 @@ public class ScreeningController {
      * Валидирует форму заполненную пользователем и возвращает результат содержащий список ошибок (если имеются) и список направлений (н.п. проверить почки, итп.)
      */
 
+    @CrossOrigin
     @PostMapping
     ResponseEntity<ScreeningResult> conductFullScreening(@RequestBody UserQuestionnaire questionnaire) {
         ScreeningResult screeningResult = screeningService.conductScreening(questionnaire);
@@ -42,6 +43,7 @@ public class ScreeningController {
      * Позволяет найти список необходимых врачей / анализов в зависимости от направления
      */
 
+    @CrossOrigin
     @GetMapping(value = "/visits")
     ResponseEntity<Set<Visit>> findVisits(@RequestParam ScreeningType screeningType) {
         return ResponseEntity.status(HttpStatus.OK).body(visitService.findVisitsOfType(screeningType));
@@ -51,6 +53,7 @@ public class ScreeningController {
      * Если у пользователя были наследственные болезни - нужно указать степень родства
      */
 
+    @CrossOrigin
     @GetMapping(value = "/relationships")
     ResponseEntity<Set<RelationshipLevel>> findRelationshipLevels() {
         return ResponseEntity.status(HttpStatus.OK).body(relationshipService.findAll());
@@ -60,6 +63,7 @@ public class ScreeningController {
      * Типы болезней (Рак, Диабет, итп.)
      */
 
+    @CrossOrigin
     @GetMapping(value = "/conditions")
     ResponseEntity<Set<ConditionName>> findConditions() {
         return ResponseEntity.status(HttpStatus.OK).body(conditionService.findAllConditions());
@@ -69,6 +73,7 @@ public class ScreeningController {
      * Подтипы болезней (н.п. Рак - Лёгкие, Диабет - 1 уровень, итп.)
      */
 
+    @CrossOrigin
     @GetMapping(value = "/condition-types")
     ResponseEntity<Map<ConditionName, Set<ConditionType>>> findConditionTypes() {
         return ResponseEntity.status(HttpStatus.OK).body(conditionService.findAllConditionTypes());

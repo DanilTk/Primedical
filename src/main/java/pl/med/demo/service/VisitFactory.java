@@ -42,21 +42,21 @@ public class VisitFactory {
                 .locationName("I-Lab, Chmielna 104")
                 .visitPrice(BigDecimal.valueOf(10))
                 .visitType(VisitType.LAB_TEST)
-                .visitName(ScreeningType.DIABETES_SCREENING.getScreeningName())
+                .visitName(ScreeningType.DIABETES_SCREENING)
                 .build();
 
         Visit visit2 = Visit.builder()
                 .locationName("MediLine, Prosta 5")
                 .visitPrice(BigDecimal.valueOf(12))
                 .visitType(VisitType.LAB_TEST)
-                .visitName(ScreeningType.DIABETES_SCREENING.getScreeningName())
+                .visitName(ScreeningType.DIABETES_SCREENING)
                 .build();
 
         Visit visit3 = Visit.builder()
                 .locationName("Synevo, Marszalkowska 14")
                 .visitPrice(BigDecimal.valueOf(9))
                 .visitType(VisitType.LAB_TEST)
-                .visitName(ScreeningType.DIABETES_SCREENING.getScreeningName())
+                .visitName(ScreeningType.DIABETES_SCREENING)
                 .build();
 
         return Set.of(visit1, visit2, visit3);
@@ -67,21 +67,21 @@ public class VisitFactory {
                 .locationName("Synevo, Bagno 5")
                 .visitPrice(BigDecimal.valueOf(9))
                 .visitType(VisitType.LAB_TEST)
-                .visitName(ScreeningType.CHOLESTEROL_SCREENING.getScreeningName())
+                .visitName(ScreeningType.CHOLESTEROL_SCREENING)
                 .build();
 
         Visit visit2 = Visit.builder()
                 .locationName("UltraLife, Grzybowska 14")
                 .visitPrice(BigDecimal.valueOf(11))
                 .visitType(VisitType.LAB_TEST)
-                .visitName(ScreeningType.CHOLESTEROL_SCREENING.getScreeningName())
+                .visitName(ScreeningType.CHOLESTEROL_SCREENING)
                 .build();
 
         Visit visit3 = Visit.builder()
                 .locationName("MedCover, Pereca 128")
                 .visitPrice(BigDecimal.valueOf(14))
                 .visitType(VisitType.LAB_TEST)
-                .visitName(ScreeningType.CHOLESTEROL_SCREENING.getScreeningName())
+                .visitName(ScreeningType.CHOLESTEROL_SCREENING)
                 .build();
 
         return Set.of(visit1, visit2, visit3);
@@ -92,7 +92,7 @@ public class VisitFactory {
                 .locationName("SmartMed, Powstancow 29")
                 .visitPrice(BigDecimal.valueOf(50))
                 .visitType(VisitType.SCREENING)
-                .visitName(ScreeningType.HYPERTENSION_SCREENING.getScreeningName())
+                .visitName(ScreeningType.HYPERTENSION_SCREENING)
                 .doctor(new Doctor("Jan", "Kowalski", Specialization.GP))
                 .build();
 
@@ -100,7 +100,7 @@ public class VisitFactory {
                 .locationName("VipMed, Karolkowa 17A")
                 .visitPrice(BigDecimal.valueOf(40))
                 .visitType(VisitType.SCREENING)
-                .visitName(ScreeningType.HYPERTENSION_SCREENING.getScreeningName())
+                .visitName(ScreeningType.HYPERTENSION_SCREENING)
                 .doctor(new Doctor("Mariusz", "Pudzianowski", Specialization.GP))
                 .build();
 
@@ -108,7 +108,7 @@ public class VisitFactory {
                 .locationName("EnelMed, Bohaterow 44")
                 .visitPrice(BigDecimal.valueOf(45))
                 .visitType(VisitType.SCREENING)
-                .visitName(ScreeningType.HYPERTENSION_SCREENING.getScreeningName())
+                .visitName(ScreeningType.HYPERTENSION_SCREENING)
                 .doctor(new Doctor("Karol", "Wojtyla", Specialization.GP))
                 .build();
 
@@ -120,7 +120,7 @@ public class VisitFactory {
                 .locationName("Endoscopy Clinic, Ksawierow 15B")
                 .visitPrice(BigDecimal.valueOf(250))
                 .visitType(VisitType.SCREENING)
-                .visitName(ScreeningType.COLONOSCOPY.getScreeningName())
+                .visitName(ScreeningType.COLONOSCOPY)
                 .doctor(new Doctor("Andrzej", "Jakimczuk", Specialization.GP))
                 .build();
 
@@ -131,21 +131,21 @@ public class VisitFactory {
         Visit visit1 = Visit.builder()
                 .locationName("Ilab, Powstancow 29")
                 .visitPrice(BigDecimal.valueOf(13))
-                .visitName(ScreeningType.FECAL_OCCULT_BLOOD_TEST.getScreeningName())
+                .visitName(ScreeningType.FECAL_OCCULT_BLOOD_TEST)
                 .visitType(VisitType.LAB_TEST)
                 .build();
 
         Visit visit2 = Visit.builder()
                 .locationName("G-Clinic, Karolkowa 17A")
                 .visitPrice(BigDecimal.valueOf(12))
-                .visitName(ScreeningType.FECAL_OCCULT_BLOOD_TEST.getScreeningName())
+                .visitName(ScreeningType.FECAL_OCCULT_BLOOD_TEST)
                 .visitType(VisitType.LAB_TEST)
                 .build();
 
         Visit visit3 = Visit.builder()
                 .locationName("Medline, Bohaterow 44")
                 .visitPrice(BigDecimal.valueOf(10))
-                .visitName(ScreeningType.FECAL_OCCULT_BLOOD_TEST.getScreeningName())
+                .visitName(ScreeningType.FECAL_OCCULT_BLOOD_TEST)
                 .visitType(VisitType.LAB_TEST)
                 .build();
 
@@ -157,7 +157,7 @@ public class VisitFactory {
                 .locationName("SmartMed, Powstancow 29")
                 .visitPrice(BigDecimal.valueOf(50))
                 .visitType(VisitType.SCREENING)
-                .visitName(ScreeningType.CERVICAL_SMEAR_SCREENING.getScreeningName())
+                .visitName(ScreeningType.CERVICAL_SMEAR_SCREENING)
                 .doctor(new Doctor("Jan", "Kowalski", Specialization.GYNECOLOGIST))
                 .build();
 
@@ -165,7 +165,7 @@ public class VisitFactory {
                 .locationName("VipMed, Karolkowa 17A")
                 .visitPrice(BigDecimal.valueOf(40))
                 .visitType(VisitType.SCREENING)
-                .visitName(ScreeningType.CERVICAL_SMEAR_SCREENING.getScreeningName())
+                .visitName(ScreeningType.CERVICAL_SMEAR_SCREENING)
                 .doctor(new Doctor("Mariusz", "Pudzianowski", Specialization.GYNECOLOGIST))
                 .build();
 
@@ -173,7 +173,7 @@ public class VisitFactory {
                 .locationName("EnelMed, Bohaterow 44")
                 .visitPrice(BigDecimal.valueOf(45))
                 .visitType(VisitType.SCREENING)
-                .visitName(ScreeningType.CERVICAL_SMEAR_SCREENING.getScreeningName())
+                .visitName(ScreeningType.CERVICAL_SMEAR_SCREENING)
                 .doctor(new Doctor("Karol", "Wojtyla", Specialization.GYNECOLOGIST))
                 .build();
 

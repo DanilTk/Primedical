@@ -5,10 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.med.demo.model.*;
+import pl.med.demo.service.ConditionService;
+import pl.med.demo.service.RelationshipLevelService;
 import pl.med.demo.service.ScreeningService;
 import pl.med.demo.service.VisitService;
 
-import java.util.Arrays;
+import java.util.Map;
 import java.util.Set;
 
 @RestController
@@ -18,6 +20,8 @@ import java.util.Set;
 public class ScreeningController {
     private final ScreeningService screeningService;
     private final VisitService visitService;
+    private final RelationshipLevelService relationshipService;
+    private final ConditionService conditionService;
 
     /**
      * Валидирует форму заполненную пользователем и возвращает результат содержащий список ошибок (если имеются) и список направлений (н.п. проверить почки, итп.)
@@ -44,21 +48,21 @@ public class ScreeningController {
     }
 
     /**
+     * Если у пользователя были наследственные болезни - нужно указать степень родства
+     */
+
+    @GetMapping(value = "/relationships")
+    ResponseEntity<Set<RelationshipLevel>> findRelationshipLevels() {
+        return ResponseEntity.status(HttpStatus.OK).body(relationshipService.findAll());
+    }
+
+    /**
      * Типы болезней (Рак, Диабет, итп.)
      */
 
     @GetMapping(value = "/conditions")
     ResponseEntity<Set<ConditionName>> findConditions() {
-        return ResponseEntity.status(HttpStatus.OK).body(Set.copyOf(Arrays.asList((ConditionName.values()))));
-    }
-
-    /**
-     * Если у пользователя были наследственные болезни - нужно указать степень родства
-     */
-
-    @GetMapping(value = "/relashionships")
-    ResponseEntity<Set<RelationshipLevel>> findRelationshipLevels() {
-        return ResponseEntity.status(HttpStatus.OK).body(Set.copyOf(Arrays.asList(RelationshipLevel.values())));
+        return ResponseEntity.status(HttpStatus.OK).body(conditionService.findAllConditions());
     }
 
     /**
@@ -66,7 +70,7 @@ public class ScreeningController {
      */
 
     @GetMapping(value = "/condition-types")
-    ResponseEntity<Set<ConditionType>> findConditionTypes() {
-        return ResponseEntity.status(HttpStatus.OK).body(Set.copyOf(Arrays.asList(ConditionType.values())));
+    ResponseEntity<Map<ConditionName, Set<ConditionType>>> findConditionTypes() {
+        return ResponseEntity.status(HttpStatus.OK).body(conditionService.findAllConditionTypes());
     }
 }

@@ -25,15 +25,13 @@ public class ConditionService {
         Map<ConditionName, Set<ConditionType>> map = new HashMap<>();
         Set<ConditionType> cancerTypes = conditionTypeRepository.findCancerTypes();
         Set<ConditionType> diabetesTypes = conditionTypeRepository.findDiabetesTypes();
-        Set<ConditionType> noType = Set.of(ConditionType.NA);
+        Set<ConditionType> noType = null;
 
         findAllConditions().forEach(conditionName -> {
             if (conditionName == ConditionName.CANCER) {
                 map.put(conditionName, cancerTypes);
             } else if (conditionName == ConditionName.DIABETES) {
                 map.put(conditionName, diabetesTypes);
-            } else {
-                map.put(conditionName, noType);
             }
         });
 

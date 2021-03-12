@@ -24,10 +24,6 @@ public class ScreeningController {
     private final RelationshipLevelService relationshipService;
     private final ConditionService conditionService;
 
-    /**
-     * Валидирует форму заполненную пользователем и возвращает результат содержащий список ошибок (если имеются) и список направлений (н.п. проверить почки, итп.)
-     */
-
     @PostMapping
     ResponseEntity<ScreeningResult> conductFullScreening(@RequestBody UserQuestionnaire questionnaire) {
         ScreeningResult screeningResult = screeningService.conductScreening(questionnaire);
@@ -39,36 +35,20 @@ public class ScreeningController {
         }
     }
 
-    /**
-     * Позволяет найти список необходимых врачей / анализов в зависимости от направления
-     */
-
     @GetMapping(value = "/visits")
     ResponseEntity<Set<Visit>> findVisits(@RequestParam ScreeningType screeningType) {
         return ResponseEntity.status(HttpStatus.OK).body(visitService.findVisitsOfType(screeningType));
     }
-
-    /**
-     * Если у пользователя были наследственные болезни - нужно указать степень родства
-     */
 
     @GetMapping(value = "/relationships")
     ResponseEntity<Set<RelationshipLevel>> findRelationshipLevels() {
         return ResponseEntity.status(HttpStatus.OK).body(relationshipService.findAll());
     }
 
-    /**
-     * Типы болезней (Рак, Диабет, итп.)
-     */
-
     @GetMapping(value = "/conditions")
     ResponseEntity<Set<ConditionName>> findConditions() {
         return ResponseEntity.status(HttpStatus.OK).body(conditionService.findAllConditions());
     }
-
-    /**
-     * Подтипы болезней (н.п. Рак - Лёгкие, Диабет - 1 уровень, итп.)
-     */
 
     @GetMapping(value = "/condition-types")
     ResponseEntity<Map<ConditionName, Set<ConditionType>>> findConditionTypes() {

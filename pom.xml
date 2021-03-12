@@ -12,7 +12,7 @@
     <artifactId>PriMedical-App</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>demo</name>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <description>Primedical Demo App</description>
 
     <properties>

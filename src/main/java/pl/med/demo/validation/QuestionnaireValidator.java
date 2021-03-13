@@ -1,10 +1,7 @@
 package pl.med.demo.validation;
 
 import org.springframework.stereotype.Component;
-import pl.med.demo.model.ClarifyingMessage;
-import pl.med.demo.model.ExceptionMessage;
-import pl.med.demo.model.MessageField;
-import pl.med.demo.model.UserQuestionnaire;
+import pl.med.demo.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +34,13 @@ public class QuestionnaireValidator {
             messages.add(message);
         }
 
-        userQuestionnaire.getFamilyConditions().forEach(condition -> {
+        for (int i = 0; i < userQuestionnaire.getFamilyConditions().size(); i++) {
+            FamilyCondition condition = userQuestionnaire.getFamilyConditions().get(i);
             if (isDiagnosisAgeValid(condition.getAgeOfConditionDetection())) {
-                messages.add(new ClarifyingMessage(MessageField.DIAGNOSIS_AGE, ExceptionMessage.INVALID_DIAGNOSIS_AGE.getMessage()));
+                messages.add(new ClarifyingMessage(MessageField.DIAGNOSIS_AGE, ExceptionMessage.INVALID_DIAGNOSIS_AGE.getMessage(), i));
+
             }
-        });
+        }
 
         return messages;
     }

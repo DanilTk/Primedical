@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -17,5 +18,5 @@ public class UserQuestionnaire {
     private double activityHours;
     private SmokingQuestionnaire smokingQuestionnaire;
     private Set<Condition> conditions;
-    private Set<FamilyCondition> familyConditions;
+    private List<FamilyCondition> familyConditions;
 }

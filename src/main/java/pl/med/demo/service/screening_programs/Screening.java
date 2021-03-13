@@ -2,6 +2,7 @@ package pl.med.demo.service.screening_programs;
 
 import pl.med.demo.model.*;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -22,10 +23,10 @@ public interface Screening {
                 .size();
     }
 
-    default boolean isConditionPresentInFamily(Condition condition, Set<FamilyCondition> familyConditions) {
-        Set<Condition> familyConditionsSet = familyConditions.stream()
+    default boolean isConditionPresentInFamily(Condition condition, List<FamilyCondition> familyConditions) {
+        List<Condition> familyConditionsSet = familyConditions.stream()
                 .flatMap(familyCondition -> Stream.of(familyCondition.getConditions()))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
 
         return familyConditionsSet.contains(condition);
     }

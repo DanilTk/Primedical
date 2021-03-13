@@ -40,7 +40,7 @@ class DemoApplicationTests {
                 .smokingQuestionnaire(new SmokingQuestionnaire(false, 0, 0, 0))
                 .activityHours(5)
                 .conditions(Set.of(new Condition(ConditionName.CVD, null)))
-                .familyConditions(Collections.emptySet())
+                .familyConditions(Collections.emptyList())
                 .build();
     }
 }

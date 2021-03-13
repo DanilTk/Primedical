@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.1a9e4ba8.chunk.css",
-    "main.js": "/static/js/main.333639fa.chunk.js",
-    "main.js.map": "/static/js/main.333639fa.chunk.js.map",
+    "main.css": "/static/css/main.2cee82b6.chunk.css",
+    "main.js": "/static/js/main.dd605858.chunk.js",
+    "main.js.map": "/static/js/main.dd605858.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.ab68ac03.js",
     "runtime-main.js.map": "/static/js/runtime-main.ab68ac03.js.map",
     "static/js/2.bafb479f.chunk.js": "/static/js/2.bafb479f.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.335fd000.chunk.js": "/static/js/3.335fd000.chunk.js",
     "static/js/3.335fd000.chunk.js.map": "/static/js/3.335fd000.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.1a9e4ba8.chunk.css.map": "/static/css/main.1a9e4ba8.chunk.css.map",
+    "static/css/main.2cee82b6.chunk.css.map": "/static/css/main.2cee82b6.chunk.css.map",
     "static/js/2.bafb479f.chunk.js.LICENSE.txt": "/static/js/2.bafb479f.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/static/media/CalibriRegular.29c57b05.ttf",
     "static/media/logo-big-white.fbd575ae.png": "/static/media/logo-big-white.fbd575ae.png"
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.ab68ac03.js",
     "static/js/2.bafb479f.chunk.js",
-    "static/css/main.1a9e4ba8.chunk.css",
-    "static/js/main.333639fa.chunk.js"
+    "static/css/main.2cee82b6.chunk.css",
+    "static/js/main.dd605858.chunk.js"
   ]
 }

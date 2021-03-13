@@ -12,5 +12,5 @@ import java.util.Set;
 @AllArgsConstructor
 public class ScreeningResult {
     private Set<Prescription> prescriptions;
-    private List<ExceptionMessage> exceptionMessages;
+    private List<ClarifyingMessage> exceptionMessages;
 }

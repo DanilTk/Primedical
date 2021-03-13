@@ -2,7 +2,7 @@ package pl.med.demo.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.med.demo.model.ExceptionMessage;
+import pl.med.demo.model.ClarifyingMessage;
 import pl.med.demo.model.Prescription;
 import pl.med.demo.model.ScreeningResult;
 import pl.med.demo.model.UserQuestionnaire;
@@ -21,7 +21,7 @@ public class ScreeningService {
 
     public ScreeningResult conductScreening(UserQuestionnaire userQuestionnaire) {
         List<Prescription> prescriptions = Collections.emptyList();
-        List<ExceptionMessage> exceptionMessages = questionnaireValidator.validate(userQuestionnaire);
+        List<ClarifyingMessage> exceptionMessages = questionnaireValidator.validate(userQuestionnaire);
 
         if (exceptionMessages.isEmpty()) {
             prescriptions = screeningProvider.conductAllScreenings(userQuestionnaire);

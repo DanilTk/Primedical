@@ -1,7 +1,9 @@
 package pl.med.demo.validation;
 
 import org.springframework.stereotype.Component;
+import pl.med.demo.model.ClarifyingMessage;
 import pl.med.demo.model.ExceptionMessage;
+import pl.med.demo.model.MessageField;
 import pl.med.demo.model.UserQuestionnaire;
 
 import java.util.ArrayList;
@@ -10,29 +12,34 @@ import java.util.List;
 @Component
 public class QuestionnaireValidator {
 
-    public List<ExceptionMessage> validate(UserQuestionnaire userQuestionnaire) {
-        List<ExceptionMessage> messages = new ArrayList<>();
+    public List<ClarifyingMessage> validate(UserQuestionnaire userQuestionnaire) {
+        List<ClarifyingMessage> messages = new ArrayList<>();
+        ClarifyingMessage message;
 
         if (isAgeValid(userQuestionnaire.getAge())) {
-            messages.add(ExceptionMessage.INVALID_AGE);
+            message = new ClarifyingMessage(MessageField.AGE, ExceptionMessage.INVALID_AGE.getMessage());
+            messages.add(message);
         }
 
         if (isWeightValid(userQuestionnaire.getWeight())) {
-            messages.add(ExceptionMessage.INVALID_WEIGHT);
+            message = new ClarifyingMessage(MessageField.WEIGHT, ExceptionMessage.INVALID_WEIGHT.getMessage());
+            messages.add(message);
         }
 
         if (isHeightValid(userQuestionnaire.getHeight())) {
-            messages.add(ExceptionMessage.INVALID_HEIGHT);
+            message = new ClarifyingMessage(MessageField.HEIGHT, ExceptionMessage.INVALID_HEIGHT.getMessage());
+            messages.add(message);
         }
 
         if (userQuestionnaire.getSmokingQuestionnaire().isSmoker()
                 && isYearsSmokedValid(userQuestionnaire.getSmokingQuestionnaire().getYearsOfSmoking(), userQuestionnaire.getAge())) {
-            messages.add(ExceptionMessage.INVALID_YEARS_SMOKED);
+            message = new ClarifyingMessage(MessageField.SMOKING_PERIOD, ExceptionMessage.INVALID_YEARS_SMOKED.getMessage());
+            messages.add(message);
         }
 
         userQuestionnaire.getFamilyConditions().forEach(condition -> {
             if (isDiagnosisAgeValid(condition.getAgeOfConditionDetection())) {
-                messages.add(ExceptionMessage.INVALID_DIAGNOSIS_AGE);
+                messages.add(new ClarifyingMessage(MessageField.DIAGNOSIS_AGE, ExceptionMessage.INVALID_DIAGNOSIS_AGE.getMessage()));
             }
         });
 

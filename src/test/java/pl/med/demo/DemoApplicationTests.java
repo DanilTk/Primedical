@@ -28,7 +28,7 @@ class DemoApplicationTests {
 
         //then:
         Assertions.assertEquals(0, result.getExceptionMessages().size());
-        Assertions.assertEquals(3, result.getPrescriptions().size());
+        Assertions.assertEquals(4, result.getPrescriptions().size());
     }
 
     private UserQuestionnaire buildQuestionnaire() {

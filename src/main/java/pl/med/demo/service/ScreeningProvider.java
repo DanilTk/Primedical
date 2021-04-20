@@ -16,6 +16,8 @@ public class ScreeningProvider {
     private final HypertensionScreening hypertensionScreening;
     private final ColonoscopyScreening colonoscopyScreening;
     private final CervicalSmearScreening cervicalSmearScreening;
+    private final FolicAcidSupplementationScreening folicAcidSupplementationScreening;
+    private final HIVScreening hivScreening;
 
     public List<Prescription> conductAllScreenings(UserQuestionnaire userQuestionnaire) {
         Prescription diabetesPrescription = diabetesScreening.performScreening(userQuestionnaire);
@@ -23,11 +25,15 @@ public class ScreeningProvider {
         Prescription hypertensionPrescription = hypertensionScreening.performScreening(userQuestionnaire);
         Prescription colonoscopyPrescription = colonoscopyScreening.performScreening(userQuestionnaire);
         Prescription cervicalSmearPrescription = cervicalSmearScreening.performScreening(userQuestionnaire);
+        Prescription folicAcidSupplementationPrescription = folicAcidSupplementationScreening.performScreening(userQuestionnaire);
+        Prescription hivTestPrescription = hivScreening.performScreening(userQuestionnaire);
 
         return List.of(diabetesPrescription,
                 cholesterolPrescription,
                 hypertensionPrescription,
                 colonoscopyPrescription,
+                hivTestPrescription,
+                folicAcidSupplementationPrescription,
                 cervicalSmearPrescription);
     }
 }

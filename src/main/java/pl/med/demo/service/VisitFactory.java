@@ -29,8 +29,14 @@ public class VisitFactory {
             case FECAL_OCCULT_BLOOD_TEST:
                 visits = buildFecalOccultBloodTestVisits();
                 break;
+            case HIV_INFECTION_TEST:
+                visits = buildHivVisits();
+                break;
             case CERVICAL_SMEAR_SCREENING:
                 visits = buildCervicalSmearVisits();
+                break;
+            case FOLIC_ACID_SUPPLEMENTATION:
+                visits = buildAcidSupplementationVisits();
                 break;
         }
 
@@ -178,5 +184,41 @@ public class VisitFactory {
                 .build();
 
         return Set.of(visit1, visit2, visit3);
+    }
+
+    private Set<Visit> buildAcidSupplementationVisits() {
+        Visit visit1 = Visit.builder()
+                .locationName("Primedic, Jana Pawla 29")
+                .visitPrice(BigDecimal.valueOf(50))
+                .visitType(VisitType.LAB_TEST)
+                .visitName(ScreeningType.FOLIC_ACID_SUPPLEMENTATION)
+                .build();
+
+        Visit visit2 = Visit.builder()
+                .locationName("ParaMed, Karuzo 17")
+                .visitPrice(BigDecimal.valueOf(45))
+                .visitType(VisitType.LAB_TEST)
+                .visitName(ScreeningType.FOLIC_ACID_SUPPLEMENTATION)
+                .build();
+
+        return Set.of(visit1, visit2);
+    }
+
+    private Set<Visit> buildHivVisits() {
+        Visit visit1 = Visit.builder()
+                .locationName("SmartMed, Powstancow 29")
+                .visitPrice(BigDecimal.valueOf(50))
+                .visitType(VisitType.LAB_TEST)
+                .visitName(ScreeningType.HIV_INFECTION_TEST)
+                .build();
+
+        Visit visit2 = Visit.builder()
+                .locationName("Synevo, Platerowek 13")
+                .visitPrice(BigDecimal.valueOf(45))
+                .visitType(VisitType.LAB_TEST)
+                .visitName(ScreeningType.HIV_INFECTION_TEST)
+                .build();
+
+        return Set.of(visit1, visit2);
     }
 }
